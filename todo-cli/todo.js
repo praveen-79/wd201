@@ -64,10 +64,6 @@ const todoList = () => {
 
 const todos = todoList();
 
-const formattedDate = (d) => {
-  return d.toISOString().split("T")[0];
-};
-
 var dateToday = new Date();
 const today = formattedDate(dateToday);
 const yesterday = formattedDate(
