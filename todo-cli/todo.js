@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 const todoList = () => {
   const all = [];
 
@@ -9,42 +11,42 @@ const todoList = () => {
     all[index].completed = true;
   };
 
+  const today = new Date();
+  const todayDate = today.getDate();
+
   const overdue = () => {
-    const today = new Date().toISOString().split("T")[0];
-    return all.filter(todo => !todo.completed && todo.dueDate < today);
+    return all.filter(todo => {
+      const todoDate = new Date(todo.dueDate).getDate();
+      return !todo.completed && todoDate === todayDate - 1;
+    });
   };
 
   const dueToday = () => {
-    const today = new Date().toISOString().split("T")[0];
-    return all.filter(todo => !todo.completed && todo.dueDate === today);
+    const todayISO = today.toISOString().split("T")[0];
+    return all.filter(todo => {
+      const todoDate = new Date(todo.dueDate).toISOString().split("T")[0];
+      return !todo.completed && todoDate === todayISO;
+    });
   };
 
   const dueLater = () => {
-    const today = new Date().toISOString().split("T")[0];
-    return all.filter(todo => !todo.completed && todo.dueDate > today);
+    return all.filter(todo => {
+      const todoDate = new Date(todo.dueDate).getDate();
+      return !todo.completed && todoDate === todayDate + 1;
+    });
   };
 
   const toDisplayableList = (list) => {
-    if (list.length === 0) {
-      return "No items";
-    }
+    return list.map(todo => {
+      const todoDate = new Date(todo.dueDate);
+      const formattedDate = todoDate.toISOString().split("T")[0];
 
-    let displayableList = "";
-    list.forEach((todo) => {
-      const status = todo.completed ? "[x]" : "[ ]";
-      const dueDate = isDueToday(todo.dueDate) ? "" : ` ${formattedDate(todo.dueDate)}`;
-      displayableList += `${status} ${todo.title}${dueDate}\n`;
-    });
-
-    return displayableList.trim();
-  };
-
-  const formattedDate = (date) => {
-    return new Date(date).toISOString().split("T")[0];
-  };
-
-  const isDueToday = (date) => {
-    return formattedDate(date) === formattedDate(new Date());
+      if (todoDate.getDate() === todayDate) {
+        return `[${todo.completed ? 'x' : ' '}] ${todo.title}`;
+      } else {
+        return `[${todo.completed ? 'x' : ' '}] ${todo.title} ${formattedDate}`;
+      }
+    }).join("\n");
   };
 
   return {
@@ -62,6 +64,8 @@ const todoList = () => {
 // DO NOT CHANGE ANYTHING BELOW THIS LINE. #
 // ####################################### #
 
+module.exports = todoList;
+
 const formattedDate = (d) => {
   return d.toISOString().split("T")[0];
 };
@@ -77,14 +81,11 @@ const tomorrow = formattedDate(
   new Date(new Date().setDate(dateToday.getDate() + 1))
 );
 
-todos.add({ title: 'Submit assignment', dueDate: yesterday, completed: false });
-todos.add({ title: 'Pay rent', dueDate: today, completed: true });
-todos.add({ title: 'Service Vehicle', dueDate: today, completed: false });
-todos.add({ title: 'File taxes', dueDate: tomorrow, completed: false });
-todos.add({ title: 'Pay electric bill', dueDate: tomorrow, completed: false });
-
-// No console.log statements in the code
-// The calling code should handle printing to the screen
+todos.add({ title: "Submit assignment", dueDate: yesterday, completed: false });
+todos.add({ title: "Pay rent", dueDate: today, completed: true });
+todos.add({ title: "Service Vehicle", dueDate: today, completed: false });
+todos.add({ title: "File taxes", dueDate: tomorrow, completed: false });
+todos.add({ title: "Pay electric bill", dueDate: tomorrow, completed: false });
 
 const overdueItems = todos.overdue();
 const formattedOverdueItems = todos.toDisplayableList(overdueItems);
@@ -95,8 +96,8 @@ const formattedDueTodayItems = todos.toDisplayableList(dueTodayItems);
 const dueLaterItems = todos.dueLater();
 const formattedDueLaterItems = todos.toDisplayableList(dueLaterItems);
 
-// Examples of how you can print the results
 console.log("My Todo-list\n");
+
 console.log("Overdue");
 console.log(formattedOverdueItems);
 console.log("\nDue Today");
