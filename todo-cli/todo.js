@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-const todoList = () => {
+const todoList = => {
   const all = [];
 
   const add = (todoItem) => {
