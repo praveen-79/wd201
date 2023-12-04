@@ -1,5 +1,5 @@
 const todoList = () => {
-  all = [];
+  const all = [];
 
   const add = (todoItem) => {
     all.push(todoItem);
@@ -61,6 +61,10 @@ const todoList = () => {
 // ####################################### #
 // DO NOT CHANGE ANYTHING BELOW THIS LINE. #
 // ####################################### #
+
+const formattedDate = (d) => {
+  return d.toISOString().split("T")[0];
+};
 
 const todos = todoList();
 
