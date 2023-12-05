@@ -25,14 +25,14 @@ const todoList = () => {
     const todayISO = today.toISOString().split("T")[0];
     return all.filter(todo => {
       const todoDate = new Date(todo.dueDate).toISOString().split("T")[0];
-      return !todo.completed && todoDate <= todayISO;
+      return todoDate <= todayISO;
     });
   };
 
   const dueLater = () => {
     return all.filter(todo => {
       const todoDate = new Date(todo.dueDate).getDate();
-      return !todo.completed && todoDate > todayDate + 1;
+      return todoDate > todayDate + 1;
     });
   };
 
