@@ -17,7 +17,7 @@ const todoList = () => {
   const overdue = () => {
     return all.filter(todo => {
       const todoDate = new Date(todo.dueDate).getDate();
-      return !todo.completed && todoDate === todayDate - 1;
+      return todoDate === todayDate - 1;
     });
   };
 
