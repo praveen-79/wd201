@@ -59,13 +59,13 @@ const todoList = () => {
       const fd = date.toISOString().split("T")[0];
       if (date.getDate() === todayDate) {
         if (list[i].completed == false) {
-          output.push([ ] ${list[i].title});
+          output.push(`[ ] ${list[i].title}`);
         } else {
-          output.push([x] ${list[i].title});
+          output.push(`[x] ${list[i].title}`);
         }
       } else {
         if (list[i].completed == false) {
-          output.push([ ] ${list[i].title} ${fd});
+          output.push(`[ ] ${list[i].title} ${fd}`);
         } else {
           output.push(`[x]  ${list[i].title} ${fd} `);
         }
