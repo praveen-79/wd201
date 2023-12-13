@@ -2,7 +2,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const p = require("path");
-const h = require("./");
+const h = require(".");
 function help(code) {
     console.log(`Usage:
   husky install [dir] (default: .husky)
