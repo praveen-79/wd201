@@ -39,6 +39,12 @@ describe("Todo test suite", () => {
   });
 
   test("should mark a todo as complete", () => {
+    add({
+      title: "Todo to be completed",
+      completed: false,
+      dueDate: new Date().toLocaleDateString("en-CA"),
+    });
+
     expect(all[0].completed).toBe(false);
     markAsComplete(0);
     expect(all[0].completed).toBe(true);
