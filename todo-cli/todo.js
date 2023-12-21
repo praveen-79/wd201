@@ -1,9 +1,11 @@
 /* eslint-disable no-undef */
 const todoList = () => {
-  all = [];
+  let all = []; // Declare all as a local variable
+
   const add = (todoItem) => {
     all.push(todoItem);
   };
+
   const markAsComplete = (index) => {
     all[index].completed = true;
   };
@@ -12,8 +14,6 @@ const todoList = () => {
   const today = new Date();
   const todayDate = today.getDate();
   const overdue = () => {
-    // Write the date check condition here and return the array
-    // of overdue items accordingly.
     const over = [];
     for (i = 0; i < all.length; i++) {
       let date = new Date(all[i].dueDate);
@@ -25,8 +25,6 @@ const todoList = () => {
   };
 
   const dueToday = () => {
-    // Write the date check condition here and return the array
-    // of todo items that are due today accordingly.
     const due = [];
     for (i = 0; i < all.length; i++) {
       let date = new Date(all[i].dueDate);
@@ -38,8 +36,6 @@ const todoList = () => {
   };
 
   const dueLater = () => {
-    // Write the date check condition here and return the array
-    // of todo items that are due later accordingly.
     const later = [];
     for (i = 0; i < all.length; i++) {
       let date = new Date(all[i].dueDate);
@@ -51,8 +47,6 @@ const todoList = () => {
   };
 
   const toDisplayableList = (list) => {
-    // Format the To-Do list here, and return the output string
-    // as per the format given above.
     const output = [];
     for (i = 0; i < list.length; i++) {
       let date = new Date(list[i].dueDate);
